@@ -1,5 +1,5 @@
-NAME = direwolf 
-TAG  = direwolf/fastegium
+NAME = direwolf1 
+TAG  = direwolf1/fastegium
 
 DEVICE=/dev/ttyUSB0
 
@@ -29,7 +29,7 @@ test:
 	docker run -it --rm --name testrun ${TAG}
 
 build:
-	docker build --pull --force-rm --tag=$(TAG) . 
+	docker build  --force-rm --tag=$(TAG) . 
 
 remove:
 	docker stop ${NAME} || true
