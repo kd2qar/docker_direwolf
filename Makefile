@@ -1,5 +1,5 @@
-NAME = direwolf1 
-TAG  = direwolf1/fastegium
+NAME=direwolf
+TAG=direwolf/fastegium
 
 DEVICE=/dev/ttyUSB0
 
@@ -36,4 +36,5 @@ remove:
 	docker rm ${NAME} || true
 
 shell:
-	docker run -it --rm ${DEV} -v /dev/snd:/dev/snd ${PRIV} ${PORT} ${VOL} --net host  --entrypoint /bin/bash ${TAG}
+	echo "NAME: '${NAME}_s'"
+	docker run -it --rm ${DEV} -v /dev/snd:/dev/snd ${PRIV} ${PORT} ${VOL} --net host  --entrypoint /bin/bash --name ${NAME}_s ${TAG}
