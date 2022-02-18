@@ -1,4 +1,5 @@
-FROM debian:stretch-slim as build
+#FROM debian:stretch-slim as build
+FROM debian:buster-slim as build
 
 LABEL maintainer="KD2QAR@gmail.com"
 
@@ -6,7 +7,7 @@ LABEL maintainer="KD2QAR@gmail.com"
 WORKDIR /root
 
 RUN apt-get update  && \
-    apt-get install -y libasound2 libasound2-data libbluetooth3 libgps22 && \
+    apt-get install -y libasound2 libasound2-data libbluetooth3 libgps23 && \
     apt-get install -y build-essential  && \
     apt-get install -y vim vim-common vim-runtime && \
     apt-get install -y ca-certificates && \

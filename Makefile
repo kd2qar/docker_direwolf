@@ -1,9 +1,7 @@
 NAME=direwolf
-TAG=direwolf/fastegium
+TAG=direwolf/kd2qar
 
 DEVICE=/dev/ttyUSB0
-
-PORT=-p 8515:8515 -p 8516:8516
 
 PORT=-p 8001:8001 -p 8000:8000
 
@@ -15,15 +13,14 @@ DEV=
 
 DEVICE=--device=/dev/ttyUSB0
 
-VOL=
+VOL=-v /dev/snd:/dev/snd
 
 PRIV="--privileged"
 
 all:: build
 
 run:
-	#docker run -d --rm --restart=always ${DEV} ${PORT} ${VOL} --name ${NAME} ${TAG} 
-	docker run -d --restart=unless-stopped -v /dev/snd:/dev/snd  ${PRIV}  ${DEV} ${PORT} ${VOL} --name ${NAME} ${TAG}
+	docker run -d --restart=unless-stopped  ${PRIV}  ${DEV} ${PORT} ${VOL} --name ${NAME} ${TAG}
 
 test: 
 	docker run -it --rm --name testrun ${TAG}
@@ -37,4 +34,4 @@ remove:
 
 shell:
 	echo "NAME: '${NAME}_s'"
-	docker run -it --rm ${DEV} -v /dev/snd:/dev/snd ${PRIV} ${PORT} ${VOL} --net host  --entrypoint /bin/bash --name ${NAME}_s ${TAG}
+	docker run -it --rm ${DEV} ${PRIV} ${PORT} ${VOL} --net host  --entrypoint /bin/bash --name ${NAME}_shell ${TAG}
