@@ -36,6 +36,6 @@ COPY * /srv/direwolf/
 COPY * /usr/local/bin/
 
 
-ENTRYPOINT ["direwolf"]
+ENTRYPOINT ["direwolf","-p"]
 
 

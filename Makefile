@@ -1,5 +1,5 @@
 NAME=direwolf
-TAG=direwolf/kd2qar
+TAG=kd2qar/direwolf
 
 DEVICE=/dev/ttyUSB0
 
@@ -17,16 +17,21 @@ VOL=-v /dev/snd:/dev/snd
 
 PRIV="--privileged"
 
+LOG=--log-driver json-file --log-opt max-size=10m --log-opt max-file=3
+
 all:: build
 
 run:
-	docker run -d --restart=unless-stopped  ${PRIV}  ${DEV} ${PORT} ${VOL} --name ${NAME} ${TAG}
+	docker run ${LOG} -d --restart=unless-stopped  ${PRIV}  ${DEV} ${PORT} ${VOL} --name ${NAME} ${TAG}
+
+runfg:
+	docker run -it ${PRIV}  ${DEV} ${PORT} ${VOL} --name ${NAME} ${TAG}
 
 test: 
 	docker run -it --rm --name testrun ${TAG}
 
 build:
-	docker build  --force-rm --tag=$(TAG) . 
+	docker build --pull  --force-rm --tag=$(TAG) . 
 
 remove:
 	docker stop ${NAME} || true
