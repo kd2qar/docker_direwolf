@@ -1,0 +1,3 @@
+#!/bin/bash
+#docker run --rm -it --entrypoint direwolf  kd2qar/direwolf -p -t 0 -dh
+docker run --rm -it --privileged -p 8000-8001:8000-8001 -v /dev/snd:/dev/snd -v /dev/pts:/devpts --entrypoint direwolf kd2qar/direwolf -p -t 4 -dh

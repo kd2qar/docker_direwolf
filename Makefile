@@ -13,7 +13,7 @@ DEV=
 
 DEVICE=--device=/dev/ttyUSB0
 
-VOL=-v /dev/snd:/dev/snd
+VOL=-v /dev/snd:/dev/snd  -v /dev/pts:/dev/pts
 
 PRIV="--privileged"
 
@@ -25,13 +25,13 @@ run:
 	docker run ${LOG} -d --restart=unless-stopped  ${PRIV}  ${DEV} ${PORT} ${VOL} --name ${NAME} ${TAG}
 
 runfg:
-	docker run -it ${PRIV}  ${DEV} ${PORT} ${VOL} --name ${NAME} ${TAG}
+	docker run --rm -it ${PRIV}  ${DEV} ${PORT} ${VOL} --name ${NAME} ${TAG}
 
 test: 
 	docker run -it --rm --name testrun ${TAG}
 
 build:
-	docker build --pull  --force-rm --tag=$(TAG) . 
+	docker build --force-rm --tag=$(TAG) . 
 
 remove:
 	docker stop ${NAME} || true
