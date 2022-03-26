@@ -15,11 +15,11 @@ RUN apt-get update  && \
     apt-get install -y build-essential  && \
     apt-get install -y vim vim-common vim-runtime && \
     apt-get install -y ca-certificates && \
-    apt-get install -y cmake libtool bash-completion && \
+    apt-get install -y cmake libtool bash-completion && \ 
     apt-get install -y git gcc g++ make cmake libasound2-dev libudev-dev libasound2 libudev1 && \
     rm -rf /var/lib/apt/lists* /tmp/* /var/tmp/* /usr/share/doc/* /usr/share/man/* && \
-    git clone https://github.com/wb2osz/direwolf.git 
-RUN cd /root/direwolf && \
+    git clone https://github.com/wb2osz/direwolf.git  && \
+    cd /root/direwolf && \
     git checkout dev && \
     mkdir build && \
     cd /root/direwolf/build && \
