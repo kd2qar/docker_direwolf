@@ -1,4 +1,9 @@
 .git
 .gitignore
-OBSOLETE
-IGNORE
+*.swp
+[Oo][Bb][Ss][Oo][Ll][Ee][Tt][Ee]
+[Ii][Gg][Nn][Oo][Rr][Ee]
+[Mm]akefile
+LICENSE
+README.md
+dw
