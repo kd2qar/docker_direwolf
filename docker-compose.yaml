@@ -1,0 +1,51 @@
+
+x-anchors:
+  image: &image kd2qar/direwolf
+  device: &device /dev/ttyUSB0
+  audiodev: &audiodev plughw:CARD=CODEC,DEV=0
+  container: &container direwolf
+
+services:
+  direwolf:
+    container_name: *container
+    image: *image
+    network_mode: bridge
+    build:
+      context: .
+      tags:
+        - kd2qar/direwolf
+    hostname: *container
+    environment:
+      TZ: Americas/New_York
+      AUDIODEV: *audiodev
+    volumes:
+      - type: bind
+        source: /etc/passwd
+        target: /etc/passwd
+        read_only: true
+      - type: bind
+        source: /dev/snd
+        target: /dev/snd
+      - type: bind
+        source: /dev/pts
+        target: /dev/pts
+    privileged: true
+    ports:
+      - target: 8000
+        published: 8000
+        protocol: tcp
+      - target: 8001
+        published: 8001
+        protocol: tcp
+    devices:
+      - "/dev/ttyUSB0:/dev/ttyUSB0"
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: 3
+
+    entrypoint:
+      - /srv/direwolf/entrypoint.sh
+
